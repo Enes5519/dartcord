@@ -1,0 +1,18 @@
+part of 'dartcord.dart';
+
+enum TokenType{ bot, user }
+
+enum OpCode{
+  DISPATCH,
+  HEARTBEAT,
+  IDENTIFY,
+  PRESENCE_UPDATE,
+  VOICE_STATE_UPDATE,
+  FIVE,
+  RESUME,
+  RECONNECT,
+  REQUEST_GUILD_MEMBERS,
+  INVALID_SESSION,
+  HELLO,
+  HEARTBEAT_ACK
+}

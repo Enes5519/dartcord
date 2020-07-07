@@ -1,0 +1,10 @@
+name: dartcord
+description: A Dart library for Discord
+version: 0.1.0
+homepage: https://github.com/Enes5519/dartcord
+
+environment:
+  sdk: '>=2.8.1 <3.0.0'
+
+dependencies:
+  http: ^0.12.1
