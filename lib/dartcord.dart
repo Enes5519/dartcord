@@ -10,6 +10,11 @@ part 'client.dart';
 part 'enums.dart';
 part 'exceptions.dart';
 
+part 'events/event.dart';
+part 'events/event_manager.dart';
+part 'events/ready_event.dart';
+part 'events/guild_create_event.dart';
+
 part 'models/user.dart';
 
 part 'network/route.dart';

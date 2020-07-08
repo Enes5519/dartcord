@@ -5,6 +5,7 @@ class DiscordClient {
 
   final String token;
   final TokenType tokenType;
+  EventManager eventManager;
 
   Timer _heartbeat;
   WebSocket _socket;
@@ -25,7 +26,9 @@ class DiscordClient {
   /// The total number of shards that this bot is using.
   int shardCount;
 
-  DiscordClient(this.token, {this.tokenType = TokenType.bot});
+  DiscordClient(this.token, {this.tokenType = TokenType.bot}){
+    eventManager = EventManager();
+  }
 
   Future<String> _getGateway() async {
     final response = await (api + 'gateway').get();
@@ -78,16 +81,10 @@ class DiscordClient {
 
       switch(packet.opcode){
         case OpCode.DISPATCH:
-          if(ready){
-            // TODO : RUN EVENTS
+          if(eventManager.events.containsKey(packet.event)){
+            eventManager.events[packet.event].handle(this, packet.data);
           }else{
-            if(packet.event == 'READY'){
-              ready = true;
-              sessionId = packet.data['session_id'] as String;
-              user = User.fromMap(packet.data['user']);
-            }else if(packet.event == 'GUILD_CREATE'){
-              // TODO : ADD GUILDS
-            }
+            print(packet.event);
           }
           break;
         case OpCode.HEARTBEAT:
@@ -101,7 +98,6 @@ class DiscordClient {
           _sendIdentify();
           break;
         case OpCode.HELLO:
-          print(packet);
           _heartbeat = Timer.periodic(
               Duration(
                   milliseconds: packet.data['heartbeat_interval'] as int),
