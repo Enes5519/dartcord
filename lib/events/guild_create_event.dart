@@ -8,6 +8,9 @@ class GuildCreateEvent extends Event{
 
   @override
   void handle(DiscordClient client, data) {
-    print(data);
+    var guild = Guild.fromMap(data);
+    client.guilds[guild.id] = guild;
+
+    guild.channels.forEach((element) { print(element.type); });
   }
 }

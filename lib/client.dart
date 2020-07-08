@@ -26,6 +26,8 @@ class DiscordClient {
   /// The total number of shards that this bot is using.
   int shardCount;
 
+  Map<Snowflake, Guild> guilds = {};
+
   DiscordClient(this.token, {this.tokenType = TokenType.bot}){
     eventManager = EventManager();
   }
