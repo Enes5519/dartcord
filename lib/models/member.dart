@@ -12,7 +12,8 @@ class Member{
   Member(this.user, this.nick);
 
   factory Member.fromMap(Map map){
-    var member = Member(User.fromMap(map['user']), map['nick'])
+    var member = Member(
+        (map['user'] != null) ? User.fromMap(map['user']) : null, map['nick'])
       ..joined_at = (map['joined_at'] != null) ? DateTime.parse(map['joined_at']) : null
       ..premium_since = (map['premium_since'] != null) ? DateTime.parse(map['premium_since']) : null
       ..deaf = map['deaf']

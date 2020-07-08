@@ -6,6 +6,7 @@ class EventManager{
   EventManager(){
     register(ReadyEvent());
     register(GuildCreateEvent());
+    register(MessageCreateEvent());
   }
 
   void register(Event event){

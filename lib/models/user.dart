@@ -20,8 +20,8 @@ class User{
 
   User(this.id, this.username, this.discriminator, {this.avatar});
 
-  factory User.fromMap(Map<String, dynamic> map){
-    return User(Snowflake(map['id']), map['username'], map['discriminator'], avatar: map['avatar'])
+  factory User.fromMap(Map map){
+    return User(Snowflake.get(map['id']), map['username'], map['discriminator'], avatar: map['avatar'])
     ..bot = map['bot']
     ..system = map['system']
     ..mfa_enabled = map['mfa_enabled']

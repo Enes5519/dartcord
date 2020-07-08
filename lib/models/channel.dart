@@ -1,6 +1,6 @@
 part of '../dartcord.dart';
 
-class Channel{
+class Channel {
   Snowflake id;
   ChannelType type;
   Snowflake guild_id;
@@ -32,9 +32,9 @@ class Channel{
 
   Channel();
 
-  factory Channel.fromMap(Map map){
+  factory Channel.fromMap(Map map) {
     Channel channel;
-    switch(ChannelType.values[map['type']]){
+    switch (ChannelType.values[map['type']]) {
       case ChannelType.GUILD_TEXT:
         channel = TextChannel();
         break;
@@ -74,10 +74,12 @@ class Channel{
       ..owner_id = Snowflake(map['owner_id'])
       ..application_id = Snowflake(map['application_id'])
       ..parent_id = Snowflake(map['parent_id'])
-      ..last_pin_timestamp = (map['last_pin_timestamp'] != null) ? DateTime.parse(map['last_pin_timestamp']) : null;
+      ..last_pin_timestamp = (map['last_pin_timestamp'] != null)
+          ? DateTime.parse(map['last_pin_timestamp'])
+          : null;
 
-    if(map['recipients'] != null){
-      map['recipients'].forEach((element){
+    if (map['recipients'] != null) {
+      map['recipients'].forEach((element) {
         channel.recipients.add(User.fromMap(element));
       });
     }
@@ -86,40 +88,53 @@ class Channel{
   }
 }
 
-
-class TextChannel extends Channel{
+class TextChannel extends Channel {
   @override
   ChannelType type = ChannelType.GUILD_TEXT;
 }
 
-class DMChannel extends Channel{
+class DMChannel extends Channel {
   @override
   ChannelType type = ChannelType.DM;
 }
 
-class VoiceChannel extends Channel{
+class VoiceChannel extends Channel {
   @override
   ChannelType type = ChannelType.GUILD_VOICE;
 }
 
-class GroupDMChannel extends Channel{
+class GroupDMChannel extends Channel {
   @override
   ChannelType type = ChannelType.GROUP_DM;
 }
 
-class CategoryChannel extends Channel{
+class CategoryChannel extends Channel {
   @override
   ChannelType type = ChannelType.GUILD_CATEGORY;
 
   CategoryChannel();
 }
 
-class NewsChannel extends Channel{
+class NewsChannel extends Channel {
   @override
   ChannelType type = ChannelType.GUILD_NEWS;
 }
 
-class StoreChannel extends Channel{
+class StoreChannel extends Channel {
   @override
   ChannelType type = ChannelType.GUILD_STORE;
+}
+
+class ChannelMention {
+  final Snowflake id;
+  final Snowflake guild_id;
+  final ChannelType type;
+  final String name;
+
+  ChannelMention(this.id, this.guild_id, this.type, this.name);
+
+  factory ChannelMention.fromMap(Map map) {
+    return ChannelMention(Snowflake(map['id']), Snowflake(map['guild_id']),
+        ChannelType.values[map['type']], map['name']);
+  }
 }
