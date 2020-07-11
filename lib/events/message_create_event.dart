@@ -9,6 +9,7 @@ class MessageCreateEvent extends Event{
   @override
   void handle(DiscordClient client, data) {
     var message = Message.fromMap(data);
+    // TODO : EVENT
     print(message.author.username + ': ' + message.content);
   }
 }

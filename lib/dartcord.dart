@@ -15,6 +15,7 @@ part 'events/event_manager.dart';
 part 'events/ready_event.dart';
 part 'events/guild_create_event.dart';
 part 'events/message_create_event.dart';
+part 'events/voice_state_update_event.dart';
 
 part 'models/attachment.dart';
 part 'models/channel.dart';
@@ -26,6 +27,7 @@ part 'models/member.dart';
 part 'models/message.dart';
 part 'models/reaction.dart';
 part 'models/role.dart';
+part 'models/voice_state.dart';
 
 part 'network/route.dart';
 part 'network/packet.dart';

@@ -7,6 +7,7 @@ class EventManager{
     register(ReadyEvent());
     register(GuildCreateEvent());
     register(MessageCreateEvent());
+    register(VoiceStateUpdateEvent());
   }
 
   void register(Event event){
